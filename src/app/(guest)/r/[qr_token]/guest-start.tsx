@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { ComplaintForm } from './complaint-form';
 
 export function GuestStart({ qrToken }: { qrToken: string }) {
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
@@ -25,10 +26,10 @@ export function GuestStart({ qrToken }: { qrToken: string }) {
     return <main className="flex min-h-screen items-center justify-center">Μη έγκυρος κωδικός δωματίου.</main>;
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-2 p-6">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-6">
       <h1 className="text-2xl font-bold">Καλώς ήρθατε</h1>
       <p className="text-gray-600">Δωμάτιο {roomLabel}</p>
-      {/* Εδώ μπαίνει το complaint form στο επόμενο κομμάτι */}
+      <ComplaintForm />
     </main>
   );
 }
