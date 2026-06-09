@@ -1,16 +1,10 @@
 'use client';
 import { useState } from 'react';
-
-const CATEGORIES = [
-  { value: 'cleanliness', label: 'Καθαριότητα' },
-  { value: 'noise', label: 'Θόρυβος' },
-  { value: 'maintenance', label: 'Βλάβη / Συντήρηση' },
-  { value: 'food', label: 'Φαγητό' },
-  { value: 'service', label: 'Εξυπηρέτηση' },
-  { value: 'other', label: 'Άλλο' },
-];
+import { useI18n } from '@/lib/i18n/context';
+const CATEGORIES = ['cleanliness', 'noise', 'maintenance', 'food', 'service', 'other'] as const;
 
 export function ComplaintForm() {
+  const { t } = useI18n();
   const [category, setCategory] = useState('cleanliness');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
@@ -34,26 +28,26 @@ export function ComplaintForm() {
   if (status === 'sent')
     return (
       <div className="w-full max-w-sm rounded-lg border p-4 text-center">
-        <p className="font-medium">Ευχαριστούμε.</p>
-        <p className="text-sm text-gray-600">Το μήνυμά σας στάλθηκε στο προσωπικό.</p>
+        <p className="font-medium">{t.complaint.sentTitle}</p>
+        <p className="text-sm text-gray-600">{t.complaint.sentBody}</p>
       </div>
     );
 
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
-      <label className="text-sm font-medium">Κατηγορία</label>
+      <label className="text-sm font-medium">{t.complaint.category}</label>
       <select className="rounded-md border p-2" value={category} onChange={(e) => setCategory(e.target.value)}>
         {CATEGORIES.map((c) => (
-          <option key={c.value} value={c.value}>{c.label}</option>
+          <option key={c} value={c}>{t.complaint.categories[c]}</option>
         ))}
       </select>
 
-      <label className="text-sm font-medium">Το μήνυμά σας</label>
+      <label className="text-sm font-medium">{t.complaint.message}</label>
       <textarea
         className="min-h-24 rounded-md border p-2"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Περιγράψτε το πρόβλημα…"
+        placeholder={t.complaint.placeholder}
       />
 
       <button
@@ -61,10 +55,10 @@ export function ComplaintForm() {
         disabled={status === 'sending' || !message.trim()}
         className="rounded-md bg-black px-4 py-2 text-white disabled:opacity-50"
       >
-        {status === 'sending' ? 'Αποστολή…' : 'Αποστολή'}
+        {status === 'sending' ? t.complaint.sending : t.complaint.submit}
       </button>
 
-      {status === 'error' && <p className="text-sm text-red-600">Κάτι πήγε στραβά. Δοκιμάστε ξανά.</p>}
+      {status === 'error' && <p className="text-sm text-red-600">{t.complaint.error}</p>}
     </div>
   );
 }

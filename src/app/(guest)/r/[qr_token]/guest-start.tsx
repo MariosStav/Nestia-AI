@@ -1,8 +1,19 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { I18nProvider, useI18n } from '@/lib/i18n/context';
+import { LocaleToggle } from '@/components/locale-toggle';
 import { ComplaintForm } from './complaint-form';
 
 export function GuestStart({ qrToken }: { qrToken: string }) {
+  return (
+    <I18nProvider>
+      <GuestStartInner qrToken={qrToken} />
+    </I18nProvider>
+  );
+}
+
+function GuestStartInner({ qrToken }: { qrToken: string }) {
+  const { t } = useI18n();
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [roomLabel, setRoomLabel] = useState('');
 
@@ -21,14 +32,15 @@ export function GuestStart({ qrToken }: { qrToken: string }) {
   }, [qrToken]);
 
   if (state === 'loading')
-    return <main className="flex min-h-screen items-center justify-center">Σύνδεση…</main>;
+    return <main className="flex min-h-screen items-center justify-center">{t.session.connecting}</main>;
   if (state === 'error')
-    return <main className="flex min-h-screen items-center justify-center">Μη έγκυρος κωδικός δωματίου.</main>;
+    return <main className="flex min-h-screen items-center justify-center">{t.session.invalid}</main>;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-6">
-      <h1 className="text-2xl font-bold">Καλώς ήρθατε</h1>
-      <p className="text-gray-600">Δωμάτιο {roomLabel}</p>
+      <div className="absolute right-4 top-4"><LocaleToggle /></div>
+      <h1 className="text-2xl font-bold">{t.welcome}</h1>
+      <p className="text-gray-600">{t.room} {roomLabel}</p>
       <ComplaintForm />
     </main>
   );
