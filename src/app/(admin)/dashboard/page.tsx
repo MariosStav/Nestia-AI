@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
+import { I18nProvider } from '@/lib/i18n/context';
 import { TicketList } from './ticket-list';
 
 export default async function DashboardPage() {
@@ -13,9 +14,8 @@ export default async function DashboardPage() {
     .order('created_at', { ascending: false });
 
   return (
-    <main className="mx-auto max-w-2xl p-6">
-      <h1 className="mb-4 text-2xl font-bold">Παράπονα</h1>
+    <I18nProvider initialLocale="el">
       <TicketList initialTickets={tickets ?? []} />
-    </main>
+    </I18nProvider>
   );
 }

@@ -24,6 +24,17 @@ export const dictionaries = {
       connecting: 'Σύνδεση…',
       invalid: 'Μη έγκυρος κωδικός δωματίου.',
     },
+    admin: {
+      complaintsTitle: 'Παράπονα',
+      empty: 'Κανένα παράπονο ακόμα.',
+      room: 'Δωμάτιο',
+      status: {
+        open: 'Ανοιχτό',
+        acknowledged: 'Σε εξέλιξη',
+        resolved: 'Επιλύθηκε',
+        dismissed: 'Απορρίφθηκε',
+      },
+    },
   },
   en: {
     welcome: 'Welcome',
@@ -49,6 +60,17 @@ export const dictionaries = {
     session: {
       connecting: 'Connecting…',
       invalid: 'Invalid room code.',
+    },
+    admin: {
+      complaintsTitle: 'Complaints',
+      empty: 'No complaints yet.',
+      room: 'Room',
+      status: {
+        open: 'Open',
+        acknowledged: 'In progress',
+        resolved: 'Resolved',
+        dismissed: 'Dismissed',
+      },
     },
   },
 } as const;

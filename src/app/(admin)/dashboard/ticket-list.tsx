@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
+import { useI18n } from '@/lib/i18n/context';
 
 type Ticket = {
   id: string;
@@ -17,6 +18,7 @@ function roomLabel(rooms: Ticket['rooms']) {
 }
 
 export function TicketList({ initialTickets }: { initialTickets: Ticket[] }) {
+  const { t } = useI18n();
   const [tickets, setTickets] = useState<Ticket[]>(initialTickets);
 
   useEffect(() => {
@@ -40,16 +42,23 @@ export function TicketList({ initialTickets }: { initialTickets: Ticket[] }) {
     return <p className="text-gray-600">Κανένα παράπονο ακόμα.</p>;
 
   return (
-    <ul className="flex flex-col gap-3">
-      {tickets.map((t) => (
-        <li key={t.id} className="rounded-lg border p-4">
-          <div className="flex justify-between text-sm text-gray-500">
-            <span>Δωμάτιο {roomLabel(t.rooms)} · {t.category}</span>
-            <span>{t.status}</span>
-          </div>
-          <p className="mt-1">{t.guest_message}</p>
-        </li>
-      ))}
-    </ul>
+    <main className="mx-auto max-w-2xl p-6">
+      <h1 className="mb-4 text-2xl font-bold">{t.admin.complaintsTitle}</h1>
+      {tickets.length === 0 ? (
+        <p className="text-gray-600">{t.admin.empty}</p>
+      ) : (
+        <ul className="flex flex-col gap-3">
+          {tickets.map((tk) => (
+            <li key={tk.id} className="rounded-lg border p-4">
+              <div className="flex justify-between text-sm text-gray-500">
+                <span>{t.admin.room} {roomLabel(tk.rooms)} · {tk.category}</span>
+                <span>{t.admin.status[tk.status as keyof typeof t.admin.status] ?? tk.status}</span>
+              </div>
+              <p className="mt-1">{tk.guest_message}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </main>
   );
 }
