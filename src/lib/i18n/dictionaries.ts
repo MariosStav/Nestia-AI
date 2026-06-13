@@ -35,6 +35,16 @@ export const dictionaries = {
         dismissed: 'Απορρίφθηκε',
       },
     },
+
+    auth: {
+      title: 'Είσοδος προσωπικού',
+      subtitle: 'Συνδεθείτε για να δείτε τα αιτήματα των επισκεπτών.',
+      email: 'Email',
+      password: 'Κωδικός',
+      signIn: 'Είσοδος',
+      signingIn: 'Σύνδεση…',
+      error: 'Λάθος στοιχεία. Δοκιμάστε ξανά.',
+    },
   },
   en: {
     welcome: 'Welcome',
@@ -61,6 +71,17 @@ export const dictionaries = {
       connecting: 'Connecting…',
       invalid: 'Invalid room code.',
     },
+
+    auth: {
+      title: 'Staff sign in',
+      subtitle: 'Sign in to view guest requests.',
+      email: 'Email',
+      password: 'Password',
+      signIn: 'Sign in',
+      signingIn: 'Signing in…',
+      error: 'Invalid credentials. Please try again.',
+    },
+    
     admin: {
       complaintsTitle: 'Complaints',
       empty: 'No complaints yet.',
