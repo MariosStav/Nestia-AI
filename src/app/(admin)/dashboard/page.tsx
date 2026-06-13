@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import { I18nProvider } from '@/lib/i18n/context';
+import { DashboardHeader } from './dashboard-header';
 import { TicketList } from './ticket-list';
 
 export default async function DashboardPage() {
@@ -15,7 +16,12 @@ export default async function DashboardPage() {
 
   return (
     <I18nProvider initialLocale="el">
-      <TicketList initialTickets={tickets ?? []} />
+      <div className="mx-auto max-w-3xl px-5 py-6">
+        <DashboardHeader />
+        <div className="mt-6">
+          <TicketList initialTickets={tickets ?? []} />
+        </div>
+      </div>
     </I18nProvider>
   );
 }

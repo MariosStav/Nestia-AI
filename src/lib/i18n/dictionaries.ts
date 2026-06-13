@@ -24,16 +24,14 @@ export const dictionaries = {
       connecting: 'Σύνδεση…',
       invalid: 'Μη έγκυρος κωδικός δωματίου.',
     },
-    admin: {
+   admin: {
       complaintsTitle: 'Παράπονα',
+      subtitle: 'Αιτήματα και παράπονα επισκεπτών σε πραγματικό χρόνο.',
       empty: 'Κανένα παράπονο ακόμα.',
       room: 'Δωμάτιο',
-      status: {
-        open: 'Ανοιχτό',
-        acknowledged: 'Σε εξέλιξη',
-        resolved: 'Επιλύθηκε',
-        dismissed: 'Απορρίφθηκε',
-      },
+      signOut: 'Αποσύνδεση',
+      status: { open: 'Ανοιχτό', acknowledged: 'Σε εξέλιξη', resolved: 'Επιλύθηκε', dismissed: 'Απορρίφθηκε' },
+      actions: { acknowledge: 'Ανάληψη', resolve: 'Επίλυση', reopen: 'Επαναφορά' },
     },
 
     auth: {
@@ -81,17 +79,15 @@ export const dictionaries = {
       signingIn: 'Signing in…',
       error: 'Invalid credentials. Please try again.',
     },
-    
+
     admin: {
       complaintsTitle: 'Complaints',
+      subtitle: 'Guest requests and complaints, in real time.',
       empty: 'No complaints yet.',
       room: 'Room',
-      status: {
-        open: 'Open',
-        acknowledged: 'In progress',
-        resolved: 'Resolved',
-        dismissed: 'Dismissed',
-      },
+      signOut: 'Sign out',
+      status: { open: 'Open', acknowledged: 'In progress', resolved: 'Resolved', dismissed: 'Dismissed' },
+      actions: { acknowledge: 'Take', resolve: 'Resolve', reopen: 'Reopen' },
     },
   },
 } as const;
