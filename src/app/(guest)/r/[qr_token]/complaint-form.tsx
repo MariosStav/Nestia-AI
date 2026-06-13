@@ -1,6 +1,10 @@
 'use client';
 import { useState } from 'react';
 import { useI18n } from '@/lib/i18n/context';
+import { Select } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+
 const CATEGORIES = ['cleanliness', 'noise', 'maintenance', 'food', 'service', 'other'] as const;
 
 export function ComplaintForm() {
@@ -27,38 +31,39 @@ export function ComplaintForm() {
 
   if (status === 'sent')
     return (
-      <div className="w-full max-w-sm rounded-lg border p-4 text-center">
-        <p className="font-medium">{t.complaint.sentTitle}</p>
-        <p className="text-sm text-gray-600">{t.complaint.sentBody}</p>
+      <div className="animate-pop flex flex-col items-center gap-2 py-4 text-center">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-success/15 text-2xl text-success">
+          ✓
+        </div>
+        <p className="text-lg font-semibold text-text">{t.complaint.sentTitle}</p>
+        <p className="text-sm text-text-muted">{t.complaint.sentBody}</p>
       </div>
     );
 
+  const options = CATEGORIES.map((c) => ({ value: c, label: t.complaint.categories[c] }));
+
   return (
-    <div className="flex w-full max-w-sm flex-col gap-3">
-      <label className="text-sm font-medium">{t.complaint.category}</label>
-      <select className="rounded-md border p-2" value={category} onChange={(e) => setCategory(e.target.value)}>
-        {CATEGORIES.map((c) => (
-          <option key={c} value={c}>{t.complaint.categories[c]}</option>
-        ))}
-      </select>
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium text-text">{t.complaint.category}</label>
+        <Select value={category} options={options} onChange={setCategory} />
+      </div>
 
-      <label className="text-sm font-medium">{t.complaint.message}</label>
-      <textarea
-        className="min-h-24 rounded-md border p-2"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder={t.complaint.placeholder}
-      />
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium text-text">{t.complaint.message}</label>
+        <Textarea
+          className="min-h-28"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder={t.complaint.placeholder}
+        />
+      </div>
 
-      <button
-        onClick={submit}
-        disabled={status === 'sending' || !message.trim()}
-        className="rounded-md bg-black px-4 py-2 text-white disabled:opacity-50"
-      >
+      <Button onClick={submit} disabled={status === 'sending' || !message.trim()}>
         {status === 'sending' ? t.complaint.sending : t.complaint.submit}
-      </button>
+      </Button>
 
-      {status === 'error' && <p className="text-sm text-red-600">{t.complaint.error}</p>}
+      {status === 'error' && <p className="text-sm text-danger">{t.complaint.error}</p>}
     </div>
   );
 }

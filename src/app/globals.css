@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
+/* ---- Guest theme (default): warm premium, dark teal atmosphere ---- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* surfaces */
+  --surface: #0D2730;        /* page background — deep teal */
+  --surface-2: #123139;      /* lifted bands: headers, nav */
+  --card: #FBF7EF;           /* warm off-white — where you read & type (high contrast) */
+
+  /* text */
+  --text: #1F2A2D;           /* primary text, on cards */
+  --text-muted: #5C6A6D;     /* secondary text, on cards */
+  --text-invert: #F2EDE3;    /* text directly on dark surfaces */
+  --text-invert-muted: #9FB2B7;
+
+  /* brand */
+  --brand: #267494;          /* teal — primary actions */
+  --brand-strong: #1B5870;
+  --brand-bright: #3FA1BA;   /* highlights, focus rings */
+
+  /* accent (gold — use sparingly) */
+  --accent: #E6B765;
+  --accent-strong: #D19E3E;
+  --accent-foreground: #2A2410; /* dark text on gold */
+
+  /* borders & feedback */
+  --border: #E4DBCB;         /* on cards */
+  --border-dark: #234049;    /* on dark surfaces */
+  --danger: #C0453B;
+  --success: #2E8B6F;
 }
 
+/* ---- Admin theme: lighter, neutral, easy on the eyes for long sessions ---- */
+[data-theme="admin"] {
+  --surface: #F4F5F4;
+  --surface-2: #FFFFFF;
+  --card: #FFFFFF;
+  --text: #1F2A2D;
+  --text-muted: #5C6A6D;
+  --text-invert: #1F2A2D;        /* admin surfaces are light → "invert" stays dark for safety */
+  --text-invert-muted: #5C6A6D;
+  --brand: #267494;
+  --brand-strong: #1B5870;
+  --brand-bright: #3FA1BA;
+  --accent: #E6B765;
+  --accent-strong: #D19E3E;
+  --accent-foreground: #2A2410;
+  --border: #E3E6E5;
+  --border-dark: #E3E6E5;
+  --danger: #C0453B;
+  --success: #2E8B6F;
+}
+
+/* ---- Map semantic vars → Tailwind utilities (bg-surface, text-card, etc.) ---- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-invert: var(--text-invert);
+  --color-text-invert-muted: var(--text-invert-muted);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-bright: var(--brand-bright);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-border-dark: var(--border-dark);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+
+  --radius-card: 1rem;
+  --radius-btn: 0.625rem;
+  --radius-input: 0.625rem;
+
+  --shadow-card: 0 4px 24px -6px rgba(13, 39, 48, 0.28);
+  --shadow-soft: 0 1px 3px rgba(13, 39, 48, 0.12);
+
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-geist-sans);
+
+  /* glass surfaces */
+  --color-glass: color-mix(in srgb, var(--card) 92%, transparent);
+  --color-glass-dark: color-mix(in srgb, var(--surface-2) 70%, transparent);
+
+  --radius-card: 1.5rem;
+  --radius-btn: 0.875rem;
+  --radius-input: 0.875rem;
+
+  --shadow-glass: 0 8px 40px -8px rgba(13, 39, 48, 0.45);
+  --shadow-glow: 0 0 0 4px color-mix(in srgb, var(--brand-bright) 25%, transparent);
+  --shadow-glow-accent: 0 0 24px -4px color-mix(in srgb, var(--accent) 55%, transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes nestia-rise {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes nestia-pop {
+  0% { transform: scale(0.96); }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+.animate-rise { animation: nestia-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-pop { animation: nestia-pop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise, .animate-pop { animation: none; }
+  * { transition-duration: 0.01ms !important; }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface);
+  color: var(--text-invert);
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
