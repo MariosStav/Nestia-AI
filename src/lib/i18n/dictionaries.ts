@@ -34,6 +34,12 @@ export const dictionaries = {
       actions: { acknowledge: 'Ανάληψη', resolve: 'Επίλυση', reopen: 'Επαναφορά' },
     },
 
+    chat: {
+      empty: 'Πώς μπορώ να σας βοηθήσω;',
+      placeholder: 'Γράψτε ένα μήνυμα…',
+      send: 'Αποστολή',
+    },
+
     auth: {
       title: 'Είσοδος προσωπικού',
       subtitle: 'Συνδεθείτε για να δείτε τα αιτήματα των επισκεπτών.',
@@ -68,6 +74,12 @@ export const dictionaries = {
     session: {
       connecting: 'Connecting…',
       invalid: 'Invalid room code.',
+    },
+
+    chat: {
+      empty: 'How can I help you?',
+      placeholder: 'Type a message…',
+      send: 'Send',
     },
 
     auth: {

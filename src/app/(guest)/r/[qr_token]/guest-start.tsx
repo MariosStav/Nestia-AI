@@ -4,6 +4,7 @@ import { I18nProvider, useI18n } from '@/lib/i18n/context';
 import { LocaleToggle } from '@/components/locale-toggle';
 import { ComplaintForm } from './complaint-form';
 import { Card } from '@/components/ui/card';
+import { Chat } from './chat';
 
 export function GuestStart({ qrToken }: { qrToken: string }) {
   return (
@@ -60,9 +61,9 @@ function GuestStartInner({ qrToken }: { qrToken: string }) {
               {t.room} {roomLabel}
             </span>
           </div>
-          <Card className="w-full">
-            <ComplaintForm />
-          </Card>
+          <Card className="flex h-[70vh] w-full flex-col">
+          <Chat />
+        </Card>
         </div>
       )}
     </main>
