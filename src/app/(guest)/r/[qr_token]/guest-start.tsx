@@ -34,7 +34,7 @@ function GuestStartInner({ qrToken }: { qrToken: string }) {
   }, [qrToken]);
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center p-5">
+    <main className="relative flex min-h-screen flex-col items-center justify-center px-3 py-5">
       {/* ambient glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-bright/20 blur-3xl" />
@@ -54,16 +54,19 @@ function GuestStartInner({ qrToken }: { qrToken: string }) {
       )}
 
       {state === 'ready' && (
-        <div className="animate-rise z-10 flex w-full max-w-sm flex-col items-center gap-6">
-          <div className="flex flex-col items-center gap-3 text-center">
-            <h1 className="text-3xl font-bold tracking-tight text-text-invert">{t.welcome}</h1>
+        <div className="animate-rise z-10 flex w-full max-w-[430px] flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-2 text-center">
+            <h1 className="text-2xl font-bold tracking-tight text-text-invert">{t.welcome}</h1>
             <span className="rounded-full border border-border-dark bg-surface-2/60 px-4 py-1 text-sm text-text-invert-muted">
               {t.room} {roomLabel}
             </span>
           </div>
-          <Card className="flex h-[70vh] w-full flex-col">
-          <Chat />
-        </Card>
+          {/* h-[72dvh] uses the dynamic viewport height so the card stays within
+              the visible area on iOS Safari when the address bar is visible.
+              max-h-[680px] prevents the card from being excessively tall on desktop. */}
+          <Card className="flex h-[72dvh] max-h-[680px] w-full flex-col">
+            <Chat />
+          </Card>
         </div>
       )}
     </main>
